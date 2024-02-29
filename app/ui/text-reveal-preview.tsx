@@ -8,7 +8,7 @@ import {
 
 export function TextRevealCardPreview() {
   return (
-    <div className="flex text-center items-center justify-center bg-[#09090c] h-[40rem] rounded-2xl w-full">
+    <div className="flex items-center justify-center bg-[#09090b] h-[40rem] rounded-2xl w-full">
       <TextRevealCard
         text="  Superdanko Shop"
         revealText="We're launching soon... "

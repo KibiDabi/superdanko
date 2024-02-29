@@ -3,7 +3,7 @@ import { TextRevealCardPreview } from "./ui/text-reveal-preview";
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
+    <main className=" items-start preview flex min-h-screen w-full  items-center justify-center sm:p-10 p-2">
       <TextRevealCardPreview />
     </main>
   );
