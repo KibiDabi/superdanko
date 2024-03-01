@@ -12,7 +12,7 @@ export default function Home() {
             SUPERDANKO WEB SHOP
           </h1>
           <p className="font-normal text-xs md:text-xl text-neutral-400  max-w-lg mx-auto">
-            Please wait, we're building up!
+          Please wait, we&apos;re building up!
           </p>
         </div>
         <div className="sm:w-1/2">
