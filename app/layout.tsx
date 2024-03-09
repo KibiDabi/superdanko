@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import { GeistSans } from "geist/font/sans";
+import { Inter, Roboto } from "next/font/google";
 import "./globals.css";
+import Link from "next/link";
+import Image from "next/image";
 
 // const inter = Inter({ subsets: ["latin"] });
+const roboto = Roboto({ weight: "900", subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -17,7 +19,25 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={GeistSans.className}>{children}</body>
+      <body className={roboto.className}>
+        <header className="flex items-center justify-between p-4">
+          <Link
+            className="flex flex-row items-center justify-center font-medium flex-nowrap gap-x-2 pr-1.5 leading-none"
+            href="/"
+          >
+            <Image
+              src="/SUPERDANKO_piksa.png"
+              alt="logo"
+              width={50}
+              height={50}
+            />
+            <span className="text-base font-semibold text-neutral-300 md:text-xl">
+              Superdanko
+            </span>
+          </Link>
+        </header>
+        {children}
+      </body>
     </html>
   );
 }
