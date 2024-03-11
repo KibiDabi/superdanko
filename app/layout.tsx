@@ -20,21 +20,17 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={roboto.className}>
-        <header className="flex items-center justify-between p-4">
-          <Link
-            className="flex flex-row items-center justify-center font-medium flex-nowrap gap-x-2 pr-1.5 leading-none"
-            href="/"
-          >
-            <Image
-              src="/SUPERDANKO_piksa.png"
-              alt="logo"
-              width={50}
-              height={50}
-            />
-            <span className="text-base font-semibold text-neutral-300 md:text-xl">
-              Superdanko
-            </span>
-          </Link>
+        <header className="flex items-center justify-center p-2">
+          <div className="flex items-center">
+            <Link href="/">
+              <Image
+                src="/SUPERDANKO_piksa.png"
+                alt="logo"
+                width={70}
+                height={70}
+              />
+            </Link>
+          </div>
         </header>
         {children}
       </body>

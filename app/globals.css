@@ -5,15 +5,15 @@
 :root {
   --foreground-rgb: 255, 255, 255;
   --background-start-rgb: 34, 34, 34;
-  --background-middle-rgb: 64, 64, 64;
-  --background-end-rgb: 34, 34, 34;
+  --background-middle-rgb: 94, 94, 94;
+  --background-end-rgb: 0, 120, 255;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --foreground-rgb: 255, 255, 255;
     --background-start-rgb: 0, 0, 0;
-    --background-middle-rgb: 32, 32, 32;
+    --background-middle-rgb: 32, 32, 49;
     --background-end-rgb: 0, 0, 0;
   }
 }
@@ -24,6 +24,7 @@ body {
       to bottom,
       rgb(var(--background-start-rgb)),
     rgb(var(--background-middle-rgb)),
+    rgb(var(--background-middle-rgb)), 
     rgb(var(--background-end-rgb))
   );
 }
