@@ -19,28 +19,31 @@ export default function Home() {
               <p className="font-sans text-xs md:text-xl text-neutral-400  max-w-lg mx-auto">
                 Please wait, we&apos;re building up!
               </p>
+              <p className="font-sans text-xs md:text-xl text-neutral-400  max-w-lg mx-auto">
+                Bildam novu web stranicu. Vraćam se ubrzo!
+              </p>
             </div>
             <div className="sm:w-1/2 mb-4 relative lg:w-96 lg:h-auto">
               <Lottie
                 animationData={animationData}
-                style={{ margin: '0 auto', marginBottom: "2rem", width: "90%", maxWidth: "400px", height: "auto" }}
-                
+                style={{ margin: '0 auto', marginBottom: "2rem", marginTop: "-2rem", width: "90%", maxWidth: "400px", height: "auto" }}
+                 
               />
             </div>
             
           </div>
-          <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 space-x-4 items-center justify-center mt-4">
+          <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 space-x-4 items-center justify-center mt-4">
               <a
                 href="https://www.instagram.com/super_danko/"
                 className="group text-gray-600 hover:text-gray-300"
               >
-                <FontAwesomeIcon icon={faInstagram} className="text-3xl md:text-3xl lg:text-4xl" />
+                <FontAwesomeIcon icon={faInstagram} className="text-4xl lg:text-5xl" />
               </a>
               <a
                 href="https://www.facebook.com/superjunackimaslac"
                 className="group text-gray-600 hover:text-gray-300"
               >
-                <FontAwesomeIcon icon={faFacebook} className="text-3xl md:text-3xl lg:text-4xl" />
+                <FontAwesomeIcon icon={faFacebook} className="text-4xl lg:text-5xl" />
               </a>
             </div>
         </div>
