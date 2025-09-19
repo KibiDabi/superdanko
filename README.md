@@ -1,36 +1,144 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# SuperDanko - Premium Peanut Butter E-commerce
 
-## Getting Started
+A modern, animated e-commerce platform built with Next.js 14, featuring premium peanut butter products with stunning animations and user interactions.
 
-First, run the development server:
+## 🚀 Features
 
+- **Modern UI/UX**: Built with Tailwind CSS and shadcn/ui components
+- **Smooth Animations**: Framer Motion animations throughout the site
+- **Authentication**: Clerk integration for user management
+- **Database**: Vercel Postgres for data persistence
+- **Responsive Design**: Mobile-first approach with beautiful desktop layouts
+- **Product Management**: Dynamic product pages with variants
+- **Shopping Cart**: Full cart functionality with Zustand state management
+
+## 🛠️ Tech Stack
+
+- **Framework**: Next.js 14 (App Router)
+- **Styling**: Tailwind CSS
+- **UI Components**: Radix UI + shadcn/ui
+- **Animations**: Framer Motion
+- **Authentication**: Clerk
+- **Database**: Vercel Postgres
+- **State Management**: Zustand
+- **Icons**: Lucide React, Heroicons, FontAwesome
+
+## 📦 Installation
+
+1. Clone the repository:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone <repository-url>
+cd superdanko
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Install dependencies:
+```bash
+npm install
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. Set up environment variables:
+```bash
+cp .env.example .env.local
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+4. Configure your environment variables in `.env.local`:
+```env
+# Clerk Authentication
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=your_clerk_publishable_key
+CLERK_SECRET_KEY=your_clerk_secret_key
 
-## Learn More
+# Vercel Postgres Database
+POSTGRES_URL=your_postgres_url
+POSTGRES_PRISMA_URL=your_postgres_prisma_url
+POSTGRES_URL_NON_POOLING=your_postgres_url_non_pooling
+POSTGRES_USER=your_postgres_user
+POSTGRES_HOST=your_postgres_host
+POSTGRES_PASSWORD=your_postgres_password
+POSTGRES_DATABASE=your_postgres_database
+```
 
-To learn more about Next.js, take a look at the following resources:
+5. Run the development server:
+```bash
+npm run dev
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+6. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## 🚀 Deployment
 
-## Deploy on Vercel
+### Vercel (Recommended)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1. Push your code to GitHub
+2. Connect your repository to Vercel
+3. Add environment variables in Vercel dashboard
+4. Deploy!
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+### Manual Deployment
+
+1. Build the project:
+```bash
+npm run build
+```
+
+2. Start the production server:
+```bash
+npm start
+```
+
+## 🗄️ Database Setup
+
+The project includes seed scripts for initial data:
+
+```bash
+# Seed all data
+npm run seed
+
+# Or seed individual tables
+npm run seedUsers
+npm run seedCategories
+npm run seedProducts
+npm run seedCart
+npm run seedOrders
+```
+
+## 📁 Project Structure
+
+```
+├── app/                    # Next.js App Router
+│   ├── (about)/           # About page route group
+│   ├── (blog)/            # Blog page route group
+│   ├── (particles)/       # Ingredients page route group
+│   ├── (product)/         # Product detail route group
+│   ├── (products)/        # Products listing route group
+│   ├── auth/              # Authentication pages
+│   ├── components/        # React components
+│   └── globals.css        # Global styles
+├── components/            # Shared UI components
+├── lib/                   # Utility functions and types
+├── hooks/                 # Custom React hooks
+├── store/                 # Zustand stores
+├── scripts/               # Database seed scripts
+└── public/                # Static assets
+```
+
+## 🎨 Key Components
+
+- **Hero**: Animated landing section with floating particles
+- **ProductList**: Dynamic product grid with animations
+- **SuperdankoBrain/Arm**: Feature sections with 3D animations
+- **Ingredients**: Interactive ingredient showcase
+- **Cart**: Shopping cart with real-time updates
+
+## 🔧 Development
+
+- **Linting**: ESLint with Next.js config
+- **Type Checking**: TypeScript strict mode
+- **Formatting**: Prettier (recommended)
+
+## 📄 License
+
+This project is private and proprietary.
+
+## 🤝 Contributing
+
+This is a private project. For any issues or suggestions, please contact the development team.

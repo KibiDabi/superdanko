@@ -1,54 +1,41 @@
-"use client";
+import * as React from "react";
 
-import Lottie from "lottie-react";
-import animationData from "../json/bodybuilder-animation.json";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faInstagram, faFacebook } from "@fortawesome/free-brands-svg-icons";
-import "@fortawesome/fontawesome-svg-core/styles.css";
+import Hero from "./components/Hero";
+import ProductList from "./components/ProductList";
+import Ingredients from "./components/Ingredients";
+import SuperdankoBrain from "./components/SuperdankoBrain";
+import SuperdankoArm from "./components/SuperdankoArm";
+import { MainFooter } from "./components/MainFooter";
+import SuperdankoCarousel from "./components/SuperdankoCarousel";
+import AnimatedTextSection from "./components/AnimatedTextSection";
 
 export default function Home() {
   return (
-    <div className="flex flex-col min-h-screen">
-      <main className="flex-grow overflow-auto">
-        <div className="flex flex-col justify-center items-center h-full sm:p-10 p-2 overflow-auto">
-          <div className="text-center space-y-4 sm:flex sm:items-center sm:space-x-4 lg:space-x-32">
-            <div className="sm:w-1/2">
-              <h1 className=" leading-tight text-gradient text-3xl sm:text-7xl lg:text-7xl font-sans  relative bg-clip-text bg-gradient-to-b from-neutral-100 to-neutral-300 py-4 lg:mt-0 lg:pt-0">
-                SUPER DANKO WEB SHOP
-              </h1>
-              <p className="font-sans text-xs md:text-xl text-neutral-400  max-w-lg mx-auto">
-                Please wait, we&apos;re building up!
-              </p>
-              <p className="font-sans text-xs md:text-xl text-neutral-400  max-w-lg mx-auto">
-                Bildam novu web stranicu. Vraćam se ubrzo!
-              </p>
-            </div>
-            <div className="sm:w-1/2 mb-4 relative lg:w-96 lg:h-auto">
-              <Lottie
-                animationData={animationData}
-                style={{ margin: '0 auto', marginBottom: "2rem", marginTop: "-2rem", width: "90%", maxWidth: "400px", height: "auto" }}
-                 
-              />
-            </div>
-            
-          </div>
-          {/* <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 space-x-4 items-center justify-center mt-4 sm:mt-2"></div> */}
-          <div className=" transform  space-x-4 items-center justify-center mt-4 sm:mt-2">
-              <a
-                href="https://www.instagram.com/super_danko/"
-                className="group text-gray-600 hover:text-gray-300"
-              >
-                <FontAwesomeIcon icon={faInstagram} className="text-4xl lg:text-5xl" />
-              </a>
-              <a
-                href="https://www.facebook.com/superjunackimaslac"
-                className="group text-gray-600 hover:text-gray-300"
-              >
-                <FontAwesomeIcon icon={faFacebook} className="text-4xl lg:text-5xl" />
-              </a>
-            </div>
-        </div>
+    <div className="mx-auto relative space-y-12 lg:space-y-0 flex min-h-screen flex-col ">
+      
+      <div className="absolute inset-0 -z-10 h-full w-full bg-black bg-[linear-gradient(to_right,#1a1919_1px,transparent_1px),linear-gradient(to_bottom,#1a1919_1px,transparent_1px)] bg-[size:6rem_4rem]">
+        <div className="absolute bottom-0 left-0 right-0 top-0 bg-[radial-gradient(circle_500px_at_75%_300px,#661919,transparent)]"></div>
+      </div>
+
+      <main className="flex flex-col lg:flex-row items-center w-full ">
+        <Hero />
       </main>
+      <div className=" mb-20 px-4 space-y-5 py-9 dark:bg-transparent md:py-11 lg:py-22">
+        <AnimatedTextSection />
+        <div className=" grid mx-auto  items-center justify-center md:max-w-[64rem] gap-4 sm:grid-cols-2 md:grid-cols-3">
+          <ProductList />
+        </div>
+      </div>
+      <div className=" pb-15 flex flex-col  overflow-hidden sm:pt-12 sm:pb-32 sm:gap-y-32  md:pb-40 md:gap-y-40">
+        <Ingredients />
+        <SuperdankoBrain />
+        <SuperdankoArm />
+        <SuperdankoCarousel href="/products" />
+      </div>
+      <MainFooter />
     </div>
   );
 }
+
+// If I add container class into this div -> <div className=" mb-20 space-y-5 bg-slate-100 py-9 dark:bg-transparent md:py-11 lg:py-22">
+// this means that the background will not goes till the end of the app on both sides
