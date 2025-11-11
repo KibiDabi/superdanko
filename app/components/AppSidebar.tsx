@@ -154,7 +154,7 @@ export default async function AppSidebar({
   return (
     <Sidebar
       collapsible="icon"
-      className="h-full z-40"
+      className="h-full z-40 bg-background"
       style={{ position: "relative" }}
       {...props}
     >

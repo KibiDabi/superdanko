@@ -24,7 +24,7 @@ interface UpdateCartParams {
 /* Fetch the cart items for a specific cart */
 
 export async function getCart(): Promise<any[]> {
-  const cookieStore = cookies();
+  const cookieStore = await cookies();
   let cartId = cookieStore.get("cartId")?.value;
 
   if (!cartId) return [];
@@ -60,7 +60,7 @@ export async function addToCart({
   quantity,
   cartId,
 }: AddToCartParams) {
-  const cookieStore = cookies();
+  const cookieStore = await cookies();
   let currentCartId = cartId || cookieStore.get("cartId")?.value;
 
   if (!currentCartId) {
@@ -70,8 +70,8 @@ export async function addToCart({
 
     currentCartId = newCart.rows[0]?.id;
 
-    // Store the new cartId in cookies
-    cookies().set("cartId", String(currentCartId));
+  // Store the new cartId in cookies
+  (await cookies()).set("cartId", String(currentCartId));
   }
 
   try {
@@ -112,7 +112,7 @@ export async function removeFromCart({ cartItemId }: RemoveFromCartParams) {
 }
 
 export async function clearCart(): Promise<void> {
-  const cookieStore = cookies();
+  const cookieStore = await cookies();
   const cartId = cookieStore.get("cartId")?.value;
 
   if (!cartId) return;

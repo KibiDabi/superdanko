@@ -41,7 +41,7 @@ export default function Cart() {
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <Button variant="outline" size="icon" className="relative">
+        <Button id="cart-button" aria-label="Open cart" variant="outline" size="icon" className="relative">
           {itemCount > 0 && (
             <Badge
               variant="outline"
@@ -54,36 +54,36 @@ export default function Cart() {
         </Button>
       </SheetTrigger>
       <SheetContent className="flex w-full flex-col pr-0 sm:max-w-lg">
-        <SheetHeader className="space-y-2.5 pr-6 py-1">
-          <SheetTitle>My Cart {itemCount > 0 && `(${itemCount})`}</SheetTitle>
+        <SheetHeader className="space-y-2.5 pr-6 pt-4 pb-2">
+          <SheetTitle className="w-full flex justify-center items-center text-center text-lg font-bold tracking-tight pt-2 pb-1">My Cart {itemCount > 0 && `(${itemCount})`}</SheetTitle>
           <SheetDescription className="sr-only" />
-          <Separator />
+          <Separator className="my-2 bg-gray-300 dark:bg-gray-800" />
         </SheetHeader>
         {itemCount > 0 ? (
           <>
-            <CartItems items={cartItems} className="flex-1" />
-            <div className="space-y-4 pr-6">
-              <Separator />
-              <div className="space-y-1.5 text-sm">
-                <div className="flex">
-                  <span className="flex-1">Shipping</span>
-                  <span>Free</span>
+            <CartItems items={cartItems} className="flex-1 px-2 sm:px-4" />
+            <div className="space-y-4 px-2 sm:px-4 pt-2 pb-4">
+              <Separator className="my-2 bg-border/80 h-[1.5px]" />
+              <div className="space-y-2 text-sm">
+                <div className="flex justify-between px-1">
+                  <span className="font-semibold">Shipping</span>
+                  <span className="font-medium text-muted-foreground">Free</span>
                 </div>
-                <div className="flex">
-                  <span className="flex-1">Taxes</span>
-                  <span>Calculated at checkout</span>
+                <div className="flex justify-between px-1">
+                  <span className="font-semibold">Taxes</span>
+                  <span className="font-medium text-muted-foreground">Calculated at checkout</span>
                 </div>
-                <div className="flex">
-                  <span className="flex-1">Total</span>
-                  <span>{formatPrice(cartTotal.toFixed(2))}</span>
+                <div className="flex justify-between px-1">
+                  <span className="font-semibold">Total</span>
+                  <span className="font-bold text-muted-foreground">{formatPrice(cartTotal.toFixed(2))}</span>
                 </div>
               </div>
-              <SheetFooter>
+              <SheetFooter className="pt-2">
                 <SheetTrigger asChild>
                   <Link
                     href="/cart"
                     className={buttonVariants({
-                      className: "w-full",
+                      className: "w-full font-semibold",
                       size: "sm",
                     })}
                   >

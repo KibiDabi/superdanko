@@ -13,17 +13,24 @@ import { Toaster } from "sonner";
 import Header from "./components/Header";
 import { SpeedInsights } from '@vercel/speed-insights/next';
 
-const fontSans = FontSans({ subsets: ["latin"], variable: "--font-sans" });
-// const roboto = Roboto({ weight: "900", subsets: ["latin"] });
+const fontSans = FontSans({ 
+  subsets: ["latin"], 
+  variable: "--font-sans",
+  display: "swap",
+  preload: true,
+});
 
 const fontMono = FontMono({
   subsets: ["latin"],
   variable: "--font-mono",
+  display: "swap",
 });
 
 const fontHeading = localFont({
   src: "../assets/fonts/CalSans-SemiBold.woff2",
   variable: "--font-heading",
+  display: "swap",
+  preload: true,
 });
 
 export const metadata: Metadata = {
@@ -54,7 +61,13 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en" suppressHydrationWarning>
-        <head />
+        <head>
+          <link rel="preconnect" href="https://fonts.googleapis.com" />
+          <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+          <link rel="preload" href="/SUPERDANKO_piksa.png" as="image" />
+          <link rel="dns-prefetch" href="//clerk.superdanko.com" />
+          <link rel="dns-prefetch" href="//vercel.com" />
+        </head>
         <body
           className={cn(
             "min-h-screen bg-background font-sans antialiased",

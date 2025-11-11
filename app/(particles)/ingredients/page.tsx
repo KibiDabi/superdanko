@@ -42,12 +42,12 @@ export default function Page() {
                       alt="Peanut Butter"
                       width={400}
                       height={400}
-                      className="w-full rounded-md h-full object-cover aspect-[4/3] transition-transform duration-300 group-hover:scale-105"
+                      className="w-full rounded-md h-full object-cover aspect-4/3 transition-transform duration-300 group-hover:scale-105"
                     />
                   </div>
 
                   {/* Overlay text */}
-                  <div className="absolute inset-0 flex flex-col justify-start sm:justify-end p-4 sm:p-6 bg-gradient-to-t from-black/70 to-transparent">
+                  <div className="absolute inset-0 flex flex-col justify-start sm:justify-end p-4 sm:p-6 bg-linear-to-t from-black/70 to-transparent">
                     <CardTitle className="text-white  font-bold">Our Secret Recipe</CardTitle>
                   
                   <CardDescription className="text-white/80 mt-2 ">

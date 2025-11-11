@@ -7,7 +7,7 @@ export default function SuperdankoCarousel({
 }: SectionTextProps) {
   return (
     <section className="lg:pt-20 sm:pt-12  md:mt-22 relative">
-      <div className="absolute inset-0 -z-10 h-full w-full bg-black bg-[linear-gradient(to_right,#161616_1px,transparent_1px),linear-gradient(to_bottom,#141313_1px,transparent_1px)] bg-[size:6rem_4rem]">
+      <div className="absolute inset-0 -z-10 h-full w-full bg-black bg-[linear-gradient(to_right,#161616_1px,transparent_1px),linear-gradient(to_bottom,#141313_1px,transparent_1px)] bg-size-[6rem_4rem]">
         <div className="absolute bottom-0 left-0 right-0 top-0 bg-[radial-gradient(circle_500px_at_50%_100px,#434141,transparent)]"></div>
       </div>{" "}
       <div className=" px-4  flex flex-col items-center justify-center min-h-screen">
@@ -22,7 +22,7 @@ export default function SuperdankoCarousel({
             animated
           />
         </div>
-        <div className="container pb-8">
+        <div className=" pb-8">
           <SuperCarousel />
         </div>
       </div>

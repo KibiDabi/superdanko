@@ -16,8 +16,8 @@ export function ProductsHeader() {
     <header className="sticky top-0 z-30 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="flex items-center gap-2 px-4 h-16">
         <SidebarTrigger className="-ml-1" />
-        <Separator orientation="vertical" className="mr-2 h-4" />
-        <Breadcrumb>
+        {/* <Separator orientation="vertical" className="mr-2 h-4" /> */}
+        {/* <Breadcrumb>
           <BreadcrumbList>
             <BreadcrumbItem className="hidden md:block">
               <BreadcrumbLink href="#">Building your app</BreadcrumbLink>
@@ -27,7 +27,7 @@ export function ProductsHeader() {
               <BreadcrumbPage>Next thing</BreadcrumbPage>
             </BreadcrumbItem>
           </BreadcrumbList>
-        </Breadcrumb>
+        </Breadcrumb> */}
       </div>
     </header>
   );

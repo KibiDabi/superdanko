@@ -55,7 +55,7 @@ const ThreeDParallax = () => {
               y: useTransform(rotateX, (value) => value),
             }}
           />
-          <div className="card__text absolute bottom-0 w-full h-16 bg-gradient-to-b from-transparent to-black flex items-center justify-center z-10">
+          <div className="card__text absolute bottom-0 w-full h-16 bg-linear-to-b from-transparent to-black flex items-center justify-center z-10">
             <p className="card__title text-white font-bold">Princess Mononoke</p>
           </div>
         </div>
@@ -69,7 +69,7 @@ const ThreeDParallax = () => {
               y: useTransform(rotateX, (value) => value),
             }}
           />
-          <div className="card__text absolute bottom-0 w-full h-16 bg-gradient-to-b from-transparent to-black flex items-center justify-center z-10">
+          <div className="card__text absolute bottom-0 w-full h-16 bg-linear-to-b from-transparent to-black flex items-center justify-center z-10">
             <p className="card__title text-white font-bold">Spirited Away</p>
           </div>
         </div>
@@ -83,7 +83,7 @@ const ThreeDParallax = () => {
               y: useTransform(rotateX, (value) => value),
             }}
           />
-          <div className="card__text absolute bottom-0 w-full h-16 bg-gradient-to-b from-transparent to-black flex items-center justify-center z-10">
+          <div className="card__text absolute bottom-0 w-full h-16 bg-linear-to-b from-transparent to-black flex items-center justify-center z-10">
             <p className="card__title text-white font-bold">Howl&apos;s Moving Castle</p>
           </div>
         </div>

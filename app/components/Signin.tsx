@@ -68,8 +68,9 @@ export default function Signin() {
           </DropdownMenuContent>
         </DropdownMenu>
       ) : (
-        <Button size="sm" variant="destructive">
+        <Button id="sign-in-button" size="sm" aria-label="Sign in" variant="destructive">
           <Link href="/auth/signin">Sign In</Link>
+          <span className="sr-only">Sign In</span>
         </Button>
       )}
     </>

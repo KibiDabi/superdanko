@@ -1,3 +1,5 @@
+
+import React from "react";
 import {
   fetchProducts,
   getSubsWithProductsGroupedByCategory,
@@ -17,11 +19,11 @@ export default async function ProductList() {
         );
 
         return (
-          <>
+          <React.Fragment key={categoryGroup.category}>
             {allProducts.map((product) => (
               <ProductCard key={product.id} product={product} />
             ))}
-          </>
+          </React.Fragment>
         );
       })}
     </>

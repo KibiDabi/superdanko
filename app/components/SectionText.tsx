@@ -58,7 +58,7 @@ export default function SectionText({
       {/* Title (staggered lines) */}
       <TitleWrapper
         className={cn(
-          "text-4xl font-display font-semibold text-center text-pretty md:text-3xl lg:text-5xl md:text-left mt-4 bg-gradient-to-br bg-gradient-stop bg-clip-text from-black via-gray to-white/30 leading-none lg:leading-tight",
+          "text-4xl font-display font-semibold text-center text-pretty md:text-3xl lg:text-5xl md:text-left mt-4 bg-linear-to-br bg-gradient-stop bg-clip-text from-black via-gray to-white/30 leading-none lg:leading-tight",
           align === "left" && "text-center",
           align === "center" && "text-center",
           align === "right" && "text-center"

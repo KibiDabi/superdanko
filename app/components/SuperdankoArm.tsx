@@ -12,7 +12,7 @@ export default function SuperdankoArm({
   return (
     <section className="pt-20 md:mt-22 relative pb-16">
       <div className="mx-auto max-w-7xl px-4 md:px-8 flex items-center flex-row-reverse">
-        <div className="flex flex-col items-center  max-w-screen-xl md:flex-row lg:justify-between">
+        <div className="flex flex-col items-center  max-w-(--breakpoint-xl) md:flex-row lg:justify-between">
           <SectionText
             tagline="Strength for Every Super Action"
             title="Power Up Your Body, Inside and Out"
@@ -23,7 +23,7 @@ export default function SuperdankoArm({
             animated={true}
           />
           <motion.div 
-            className="relative flex-shrink-0 md:w-6/12"
+            className="relative shrink-0 md:w-6/12"
             initial={{ opacity: 0, scale: 0.8, rotateY: -20 }}
             whileInView={{ 
               opacity: 1, 
@@ -73,7 +73,7 @@ export default function SuperdankoArm({
               
               {/* Power lines effect */}
               <motion.div
-                className="absolute inset-0 bg-gradient-to-r from-transparent via-red-500/20 to-transparent rounded-2xl"
+                className="absolute inset-0 bg-linear-to-r from-transparent via-red-500/20 to-transparent rounded-2xl"
                 initial={{ x: "-100%", opacity: 0 }}
                 whileHover={{ 
                   x: "100%", 
@@ -84,7 +84,7 @@ export default function SuperdankoArm({
               
               {/* Energy pulse effect */}
               <motion.div
-                className="absolute inset-0 bg-gradient-to-br from-red-500/10 via-transparent to-red-600/15 rounded-2xl"
+                className="absolute inset-0 bg-linear-to-br from-red-500/10 via-transparent to-red-600/15 rounded-2xl"
                 animate={{
                   opacity: [0.3, 0.8, 0.3],
                 }}
@@ -98,7 +98,7 @@ export default function SuperdankoArm({
             
             {/* Power particles */}
             <motion.div
-              className="absolute -top-6 -right-6 w-4 h-4 bg-red-500 rounded-full"
+              className="absolute -top-6 -right-6 size-4 bg-red-500 rounded-full"
               animate={{
                 y: [0, -30, 0],
                 x: [0, 10, 0],

@@ -32,7 +32,7 @@ export default function ProductCard({
           height={200}
           width={450}
           alt={product.name}
-          className="object-cover"
+          className="object-cover h-68 w-full block"
         />
       </CardHeader>
       <span className="sr-only">{product.name}</span>

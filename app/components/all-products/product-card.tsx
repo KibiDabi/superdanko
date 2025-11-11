@@ -43,15 +43,15 @@ export default function ProductPage({ product }: ProductCardProps) {
   const [isLoading, setIsLoading] = useState(false);
 
   return (
-    <Card>
+    <Card className="rounded-lg overflow-hidden size-full">
       <Link aria-label={product.name} href={`/product/${product.id}`}>
-        <CardHeader>
+        <CardHeader className="border-b p-0">
           <AspectRatio ratio={4 / 3}>
             {product.image_url ? (
               <Image
                 src={product.image_url}
                 alt={product.name}
-                className="object-cover rounded-md"
+                className="object-cover"
                 sizes="(min-width: 1024px) 20vw, (min-width: 768px) 25vw, (min-width: 640px) 33vw, (min-width: 475px) 50vw, 100vw"
                 fill
                 loading="lazy"

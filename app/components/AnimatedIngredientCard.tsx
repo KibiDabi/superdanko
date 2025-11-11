@@ -98,7 +98,7 @@ export function AnimatedIngredientCard({
         }}
       />
       {/* Inner Card Content */}
-      <Card className="relative z-20 h-full border border-white/[0.11] bg-background/50 backdrop-blur">
+      <Card className="relative py-6 gap-6 z-20 h-full border border-white/11 bg-background/50 backdrop-blur">
         {children}
       </Card>
     </motion.div>

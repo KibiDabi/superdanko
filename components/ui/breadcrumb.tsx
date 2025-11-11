@@ -3,72 +3,75 @@ import { Slot } from "@radix-ui/react-slot"
 import { cn } from "@/lib/utils"
 import { ChevronRightIcon, DotsHorizontalIcon } from "@radix-ui/react-icons"
 
-const Breadcrumb = React.forwardRef<
-  HTMLElement,
-  React.ComponentPropsWithoutRef<"nav"> & {
-    separator?: React.ReactNode
-  }
->(({ ...props }, ref) => <nav ref={ref} aria-label="breadcrumb" {...props} />)
+const Breadcrumb = (
+  {
+    ...props
+  }: React.ComponentPropsWithoutRef<"nav">
+) => <nav data-slot="breadcrumb" aria-label="breadcrumb" {...props} />
 Breadcrumb.displayName = "Breadcrumb"
 
-const BreadcrumbList = React.forwardRef<
-  HTMLOListElement,
-  React.ComponentPropsWithoutRef<"ol">
->(({ className, ...props }, ref) => (
-  <ol
-    ref={ref}
-    className={cn(
-      "flex flex-wrap items-center gap-1.5 break-words text-sm text-muted-foreground sm:gap-2.5",
-      className
-    )}
-    {...props}
-  />
-))
+const BreadcrumbList = (
+  {
+    className,
+    ...props
+  }: React.ComponentPropsWithoutRef<"ol">
+) => (<ol
+  data-slot="list"
+  className={cn(
+    "flex flex-wrap items-center gap-1.5 break-words text-sm text-muted-foreground sm:gap-2.5",
+    className
+  )}
+  {...props}
+/>)
 BreadcrumbList.displayName = "BreadcrumbList"
 
-const BreadcrumbItem = React.forwardRef<
-  HTMLLIElement,
-  React.ComponentPropsWithoutRef<"li">
->(({ className, ...props }, ref) => (
-  <li
-    ref={ref}
-    className={cn("inline-flex items-center gap-1.5", className)}
-    {...props}
-  />
-))
+const BreadcrumbItem = (
+  {
+    className,
+    ...props
+  }: React.ComponentPropsWithoutRef<"li">
+) => (<li
+  data-slot="item"
+  className={cn("inline-flex items-center gap-1.5", className)}
+  {...props}
+/>)
 BreadcrumbItem.displayName = "BreadcrumbItem"
 
-const BreadcrumbLink = React.forwardRef<
-  HTMLAnchorElement,
-  React.ComponentPropsWithoutRef<"a"> & {
-    asChild?: boolean
-  }
->(({ asChild, className, ...props }, ref) => {
+const BreadcrumbLink = (
+  {
+    asChild,
+    className,
+    ...props
+  }: {
+    asChild?: boolean;
+    className?: string;
+  } & React.ComponentPropsWithoutRef<"a">
+) => {
   const Comp = asChild ? Slot : "a"
 
   return (
     <Comp
-      ref={ref}
+      data-slot="link"
       className={cn("transition-colors hover:text-foreground", className)}
       {...props}
     />
   )
-})
+}
 BreadcrumbLink.displayName = "BreadcrumbLink"
 
-const BreadcrumbPage = React.forwardRef<
-  HTMLSpanElement,
-  React.ComponentPropsWithoutRef<"span">
->(({ className, ...props }, ref) => (
-  <span
-    ref={ref}
-    role="link"
-    aria-disabled="true"
-    aria-current="page"
-    className={cn("font-normal text-foreground", className)}
-    {...props}
-  />
-))
+const BreadcrumbPage = (
+  {
+    className,
+    ...props
+  }: React.ComponentPropsWithoutRef<"span">
+) => (<span
+  data-slot="page"
+  role="link"
+  aria-disabled="true"
+  aria-current="page"
+  className={cn("font-normal text-foreground", className)}
+  {...props}
+/>)
 BreadcrumbPage.displayName = "BreadcrumbPage"
 
 const BreadcrumbSeparator = ({

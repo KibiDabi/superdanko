@@ -1,16 +1,19 @@
 import Image from "next/image";
 import Link from "next/link";
-import { navigationRoutes } from "../data/navData";
+import { getNavigationRoutes } from "../data/navData";
 import { Icons } from "./Icons";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
-export function MainFooter() {
+export async function MainFooter() {
+
+  const navigationRoutes = await getNavigationRoutes();
+  
   return (
     <footer className="w-full border-t bg-background">
-      <section className="grid items-center gap-8 pb-8 pt-6 lg:py-6 container">
-        <section className="flex flex-col  gap-10 lg:flex-row lg:gap-20">
-          <section>
+      <section className="grid items-center gap-8 pb-8 pt-6 lg:py-6  px-4 sm:px-8">
+        <section className="flex flex-col gap-10 lg:flex-row lg:gap-40">
+          <section className="lg:pl-0">
             <Link href="/" className="flex w-fit items-center space-x-2">
               <Image
                 src="/SUPERDANKO_piksa.png"
@@ -25,7 +28,7 @@ export function MainFooter() {
           <section className="grid flex-1 grid-cols-1 gap-10 xxs:grid-cols-2 sm:grid-cols-4">
             {navigationRoutes.footerNav.map((item) => (
               <div key={item.title} className="space-y-3">
-                <h4 className="text-base font-medium">{item.title}</h4>
+                <p className="text-base font-medium">{item.title}</p>
                 <ul className="space-y-2.5">
                   {item.items.map((fragment) => (
                     <li key={fragment.title}>
@@ -43,13 +46,14 @@ export function MainFooter() {
             ))}
           </section>
         </section>
-        <section className="flex items-center space-x-4">
+        <section className="flex items-center space-x-4 px-1 sm:px-2 md:px-4 lg:px-0">
           <div className="flex-1 text-left text-sm leading-loose text-muted-foreground">
             © 2025 SuperDanko™. All Rights Reserved.
           </div>
           <div className="flex items-center space-x-1">
             <Link
               href="https://www.instagram.com/super_danko"
+              aria-label="Instagram"
               className={cn(
                 buttonVariants({
                   size: "icon",
@@ -61,6 +65,7 @@ export function MainFooter() {
             </Link>
             <Link
               href="https://www.instagram.com/super_danko"
+              aria-label="Facebook"
               className={cn(
                 buttonVariants({
                   size: "icon",
@@ -72,6 +77,7 @@ export function MainFooter() {
             </Link>
             <Link
               href="https://www.instagram.com/super_danko"
+              aria-label="TikTok"
               className={cn(
                 buttonVariants({
                   size: "icon",

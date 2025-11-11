@@ -11,7 +11,7 @@ import { Icons } from "./Icons";
 import Link from "next/link";
 import { ArrowRightIcon } from "@radix-ui/react-icons";
 import { AnimatedIngredientCard } from "./AnimatedIngredientCard";
-import { motion } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
 
 const containerVariants = {
   hidden: {},
@@ -27,13 +27,17 @@ const fadeUpVariants = {
   visible: {
     opacity: 1,
     y: 0,
-    transition: { type: "spring", stiffness: 80, damping: 15 },
+    transition: { type: "spring" as const, stiffness: 80, damping: 15 },
   },
 };
 
-const cardVariants = {
-  hidden: { opacity: 0, y: 40, scale: 0.95 },
-  visible: (i: number) => ({
+const cardVariants: Variants = {
+  hidden: (i: number = 0) => ({
+    opacity: 0,
+    y: 40,
+    scale: 0.95,
+  }),
+  visible: (i: number = 0) => ({
     opacity: 1,
     y: 0,
     scale: 1,
@@ -107,7 +111,7 @@ export default function Ingredients() {
 
   return (
     <section className="relative pb-8">
-      <div className="absolute inset-0 -z-10 h-full w-full bg-black bg-[linear-gradient(to_right,#151515_1px,transparent_1px),linear-gradient(to_bottom,#141414_1px,transparent_1px)] bg-[size:6rem_4rem]">
+      <div className="absolute inset-0 -z-10 h-full w-full bg-black bg-[linear-gradient(to_right,#151515_1px,transparent_1px),linear-gradient(to_bottom,#141414_1px,transparent_1px)] bg-size-[6rem_4rem]">
         <div className="absolute bottom-0 left-0 right-0 top-0 bg-[radial-gradient(circle_800px_at_20%_200px,#343435,transparent)]"></div>
       </div>
 
@@ -169,7 +173,7 @@ export default function Ingredients() {
               layout
             >
               <AnimatedIngredientCard className={item.cardClass}>
-                <CardHeader className="pb-3">
+                <CardHeader className="pb-3 px-6">
                   <div className="space-y-4">
                     {item.icon}
                     <CardTitle>{item.title}</CardTitle>

@@ -1,65 +1,51 @@
+import { fetchRecipesFromSanity } from "@/sanity/fetchRecipes";
+import { fetchBlogPostsFromSanity } from "@/sanity/fetchBlogPosts";
 import { navLinksConfig } from "./types";
 
-export const navLinks: navLinksConfig = {
-  categories: [
-    {
-      name: "Recipes",
-      description: "The best recipes in the world.",
-      subcategories: [
+export async function getNavLinks(): Promise<navLinksConfig> {
+
+  const [recipes, blogPosts] = await Promise.all([
+    fetchRecipesFromSanity(),
+    fetchBlogPostsFromSanity()
+  ]);
+
+  return {
+    categories: [
+      {
+        name: "Recipes",
+        description: "The best recipes in the world.",
+        subcategories: [
         {
-          name: "Superhero Breakfast Boost",
-          description: "A power-packed breakfast",
+          name: "All",
+          description: "See all recipes",
           image: "/path-to-image",
-          slug: "breakfast",
+          slug: "recipes",
         },
-        {
-          name: "Post-Workout Power Snack",
-          description: "Protein-rich snack that rebuilds muscles",
+        ...recipes.map((recipe: any) => ({
+          name: recipe.title,
+          description: recipe.shortDescription,
           image: "/path-to-image",
-          slug: "protein",
-        },
-        {
-          name: "Energy-Boosting Smoothie",
-          description: "Blend your way to greatness",
-          image: "/path-to-image",
-          slug: "smoothie",
-        },
-        {
-          name: "Midnight Hero Treat",
-          description: "Satisfy your cravings with a guilt-free treat",
-          image: "/path-to-image",
-          slug: "treat",
-        },
+          slug: `recipes/${recipe.slug}`,
+        })),
       ],
     },
+    // BLOG SECTION
     {
-      name: "Shop",
-      description: "Craziest web shop on the planet",
+      name: "Blog",
+      description: "Insights, tips, and stories from the world of SuperDanko",
       subcategories: [
         {
-          name: "SuperDanko Starter Pack",
-          description: "Begin your hero journey",
+          name: "All Posts",
+          description: "Stay updated with our latest news",
           image: "/path",
-          slug: "starter",
+          slug: "blog",
         },
-        {
-          name: "Limited Edition Jars",
-          description: "Collect rare, exclusive flavors",
+        ...blogPosts.map((post: any) => ({
+          name: post.title,
+          description: post.shortDescription,
           image: "/path",
-          slug: "jars",
-        },
-        {
-          name: "SuperDanko Merch",
-          description: "Wear your hero pride",
-          image: "/path",
-          slug: "merch",
-        },
-        {
-          name: "Gift Boxes for Heroes",
-          description: "Spread the love with gift sets",
-          image: "/path",
-          slug: "giftbox",
-        },
+          slug: `blog/${post.slug}`,
+        })),
       ],
     },
     {
@@ -76,7 +62,7 @@ export const navLinks: navLinksConfig = {
           name: "The SuperDanko Team",
           description: "Meet the heroes behind the jars",
           image: "/path",
-          slug: "team",
+          slug: "about",
         },
         {
           name: "Our Ingredients",
@@ -94,3 +80,4 @@ export const navLinks: navLinksConfig = {
     },
   ],
 };
+}

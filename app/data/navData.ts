@@ -1,12 +1,15 @@
-import { navLinks } from "@/lib/navLinks";
+import { getNavLinks } from "@/lib/navLinks";
 import { NavigationItem } from "@/lib/types";
 
-export const navigationRoutes: NavigationItem = {
-  name: "Super Danko",
-  description: "An online web shop for peanut butters",
-  url: "https://superdanko.com",
-  ogImage: "https://superdanko.com",
-  mainNav: [
+export async function getNavigationRoutes(): Promise<NavigationItem> {
+  const navLinks = await getNavLinks();
+
+  return {
+    name: "Super Danko",
+    description: "An online web shop for peanut butters",
+    url: "https://superdanko.com",
+    ogImage: "https://superdanko.com",
+    mainNav: [
     {
       title: "Products",
       items: [
@@ -34,7 +37,7 @@ export const navigationRoutes: NavigationItem = {
       title: category.name,
       items: category.subcategories.map((subcategory) => ({
         title: subcategory.name,
-        href: `/categories/${category.name}/${subcategory.slug}`,
+        href: `/${subcategory.slug}`,
         description: subcategory.description,
         items: [],
       })),
@@ -123,3 +126,4 @@ export const navigationRoutes: NavigationItem = {
     },
   ],
 };
+}

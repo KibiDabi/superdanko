@@ -25,7 +25,7 @@ export default async function Page() {
                   {categoryGroup.category} Products
                 </h1>
 
-                <div className="grid flex-1 scroll-mt-20 items-start gap-10 md:grid-cols-2 md:gap-6 lg:grid-cols-3 xl:gap-10 mt-6">
+                <div className="grid mx-auto scroll-mt-20  gap-10 md:grid-cols-2 md:gap-6 lg:grid-cols-3 xl:gap-10 mt-6">
                   {allProducts.map((product) => (
                     <ProductPage key={product.id} product={product} />
                   ))}
@@ -37,14 +37,14 @@ export default async function Page() {
           })}
         </div>
       </div>
-      <div className="mt-20">
+      {/* <div className="mt-20">
       <MainFooter />
-      </div>
+      </div> */}
     </>
   );
 }
 
 // If we want two products per column use this:
-// grid grid-cols-1 md:grid-cols-2 gap-6 mt-6  max-w-screen-md
+// grid grid-cols-1 md:grid-cols-2 gap-6 mt-6  max-w-(--breakpoint-md)
 // instead of this classes here:
 // <div className="grid flex-1 scroll-mt-20 items-start gap-10 md:grid-cols-2 md:gap-6 lg:grid-cols-3 xl:gap-10 mt-6">

@@ -12,17 +12,23 @@ import {
 import { NavigationItem } from "@/lib/types";
 import Image from "next/image";
 import Link from "next/link";
-import { navigationRoutes } from "../data/navData";
 import { cn } from "@/lib/utils";
+
+interface SiteMeta {
+  name: string;
+  description: string;
+}
 
 interface NavbarProps {
   items: NavigationItem["mainNav"];
+  siteMeta?:  SiteMeta;
+  className?: string;
 }
 
-export default function MainNavbar({ items }: NavbarProps) {
+export default function MainNavbar({ items, siteMeta, className }: NavbarProps) {
   console.log(items.map((item) => item.items.map((item) => item.description)));
   return (
-    <div className="hidden gap-6 lg:flex">
+    <div className={cn("hidden gap-6 lg:flex", className)}>
       <Link href="/" className="hidden items-center space-x-2 lg:flex">
         <Image src="/SUPERDANKO_piksa.png" alt="logo" width={50} height={50} />
         <span className="hidden text-2xl font-bold lg:inline-block">
@@ -41,7 +47,7 @@ export default function MainNavbar({ items }: NavbarProps) {
                   <NavigationMenuLink asChild>
                     <Link
                       href="/"
-                      className="flex size-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
+                      className="flex size-full select-none flex-col justify-end rounded-md bg-linear-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
                     >
                       <Image
                         src="/SUPERDANKO_piksa.png"
@@ -52,10 +58,10 @@ export default function MainNavbar({ items }: NavbarProps) {
                         aria-hidden="true"
                       />
                       <div className="mb-2 mt-4 text-lg font-medium">
-                        {navigationRoutes.name}
+                        {siteMeta?.name ?? 'SuperDanko'}
                       </div>
                       <p className="text-sm leading-tight text-muted-foreground">
-                        {navigationRoutes.description}
+                        {siteMeta?.description ?? 'An online web shop for peanut butters'}
                       </p>
                     </Link>
                   </NavigationMenuLink>
@@ -100,23 +106,25 @@ export default function MainNavbar({ items }: NavbarProps) {
   );
 }
 
-const ListItem = React.forwardRef<
-  React.ElementRef<"a">,
-  React.ComponentPropsWithoutRef<"a">
->(({ className, title, children, href, ...props }, ref) => {
+interface ListItemProps {
+  href: string;
+  title: string;
+  children: React.ReactNode;
+  className?: string;
+}
+
+function ListItem({ href, title, children, className }: ListItemProps) {
   return (
     <li>
       <NavigationMenuLink asChild>
         <Link
           href={String(href)}
-          ref={ref}
           className={cn(
             "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
             className
           )}
-          {...props}
         >
-          <div className="text-sm font-medium leading-none">{title}</div>
+          <div className="text-sm font-medium leading-snug">{title}</div>
           <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
             {children}
           </p>
@@ -124,6 +132,6 @@ const ListItem = React.forwardRef<
       </NavigationMenuLink>
     </li>
   );
-});
+}
 
 ListItem.displayName = "ListItem";
