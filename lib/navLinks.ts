@@ -56,7 +56,7 @@ export async function getNavLinks(): Promise<navLinksConfig> {
           name: "Our Mission",
           description: "We're here to fuel your superpowers",
           image: "/path",
-          slug: "mission",
+          slug: "about/mission",
         },
         {
           name: "The SuperDanko Team",
@@ -69,12 +69,6 @@ export async function getNavLinks(): Promise<navLinksConfig> {
           description: "Discover the superfoods that make our butters",
           image: "/path",
           slug: "ingredients",
-        },
-        {
-          name: "Join the League",
-          description: "Become part of the SuperDanko community",
-          image: "/path",
-          slug: "community",
         },
       ],
     },

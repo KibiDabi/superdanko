@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Check, Plus, Send } from "lucide-react";
+import { ArrowUpIcon, CheckIcon, PlusIcon, } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 import { Card, CardContent, CardFooter, CardHeader } from "../card";
@@ -30,6 +30,7 @@ import {
   CommandItem,
   CommandList,
 } from "../command";
+import { InputGroup, InputGroupAddon, InputGroupButton, InputGroupInput } from "../input-group";
 
 const users = [
   {
@@ -89,15 +90,15 @@ export function CardsChat() {
   return (
     <>
       <Card>
-        <CardHeader className="flex flex-row items-center">
-          <div className="flex items-center space-x-4">
-            <Avatar>
+        <CardHeader className="flex flex-row items-center p-6">
+          <div className="flex items-center gap-4">
+            <Avatar className="border">
               <AvatarImage src="/avatars/01.png" alt="Image" />
               <AvatarFallback>SD</AvatarFallback>
             </Avatar>
-            <div>
-              <p className="text-sm font-medium leading-none">Super Danko</p>
-              <p className="text-sm text-muted-foreground">super@danko.com</p>
+            <div className="flex flex-col gap-0.5">
+              <p className="text-sm leading-none font-medium">Super Danko</p>
+              <p className="text-muted-foreground text-xs">super@danko.com</p>
             </div>
           </div>
           <TooltipProvider delayDuration={0}>
@@ -105,11 +106,11 @@ export function CardsChat() {
               <TooltipTrigger asChild>
                 <Button
                   size="icon"
-                  variant="outline"
-                  className="ml-auto rounded-full"
+                  variant="secondary"
+                  className="ml-auto size-8 rounded-full"
                   onClick={() => setOpen(true)}
                 >
-                  <Plus />
+                  <PlusIcon />
                   <span className="sr-only">New message</span>
                 </Button>
               </TooltipTrigger>
@@ -117,15 +118,15 @@ export function CardsChat() {
             </Tooltip>
           </TooltipProvider>
         </CardHeader>
-        <CardContent>
-          <div className="space-y-4">
+        <CardContent className="p-6 pt-0">
+          <div className="flex flex-col gap-4">
             {messages.map((message, index) => (
               <div
                 key={index}
                 className={cn(
                   "flex w-max max-w-[75%] flex-col gap-2 rounded-lg px-3 py-2 text-sm",
                   message.role === "user"
-                    ? "ml-auto bg-primary text-primary-foreground"
+                    ? "bg-primary text-primary-foreground ml-auto"
                     : "bg-muted"
                 )}
               >
@@ -134,40 +135,47 @@ export function CardsChat() {
             ))}
           </div>
         </CardContent>
-        <CardFooter>
+        <CardFooter className="p-6 pt-0">
           <form
             onSubmit={(event) => {
-              event.preventDefault();
-              if (inputLength === 0) return;
+              event.preventDefault()
+              if (inputLength === 0) return
               setMessages([
                 ...messages,
                 {
                   role: "user",
                   content: input,
                 },
-              ]);
-              setInput("");
+              ])
+              setInput("")
             }}
-            className="flex w-full items-center space-x-2"
+            className="relative w-full"
           >
-            <Input
-              id="message"
-              placeholder="Type your message..."
-              className="flex-1"
-              autoComplete="off"
-              value={input}
-              onChange={(event) => setInput(event.target.value)}
-            />
-            <Button type="submit" size="icon" disabled={inputLength === 0}>
-              <Send />
-              <span className="sr-only">Send</span>
-            </Button>
+            <InputGroup>
+              <InputGroupInput
+                id="message"
+                placeholder="Type your message..."
+                autoComplete="off"
+                value={input}
+                onChange={(event) => setInput(event.target.value)}
+              />
+              <InputGroupAddon align="inline-end">
+                <InputGroupButton
+                  type="submit"
+                  size="icon-xs"
+                  className="rounded-full"
+                >
+                  <ArrowUpIcon />
+                  <span className="sr-only">Send</span>
+                </InputGroupButton>
+              </InputGroupAddon>
+            </InputGroup>
           </form>
         </CardFooter>
       </Card>
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent className="gap-0 p-0 outline-none">
-          <DialogHeader className="px-4 pb-4 pt-5">
+          <DialogHeader className="px-4 pt-5 pb-4">
             <DialogTitle>New message</DialogTitle>
             <DialogDescription>
               Invite a user to this thread. This will create a new group
@@ -178,41 +186,42 @@ export function CardsChat() {
             <CommandInput placeholder="Search user..." />
             <CommandList>
               <CommandEmpty>No users found.</CommandEmpty>
-              <CommandGroup className="p-2">
+              <CommandGroup>
                 {users.map((user) => (
                   <CommandItem
                     key={user.email}
-                    className="flex items-center px-2"
+                    data-active={selectedUsers.includes(user)}
+                    className="data-[active=true]:opacity-50"
                     onSelect={() => {
                       if (selectedUsers.includes(user)) {
                         return setSelectedUsers(
                           selectedUsers.filter(
                             (selectedUser) => selectedUser !== user
                           )
-                        );
+                        )
                       }
 
                       return setSelectedUsers(
                         [...users].filter((u) =>
                           [...selectedUsers, user].includes(u)
                         )
-                      );
+                      )
                     }}
                   >
-                    <Avatar>
+                    <Avatar className="border">
                       <AvatarImage src={user.avatar} alt="Image" />
                       <AvatarFallback>{user.name[0]}</AvatarFallback>
                     </Avatar>
                     <div className="ml-2">
-                      <p className="text-sm font-medium leading-none">
+                      <p className="text-sm leading-none font-medium">
                         {user.name}
                       </p>
-                      <p className="text-sm text-muted-foreground">
+                      <p className="text-muted-foreground text-sm">
                         {user.email}
                       </p>
                     </div>
                     {selectedUsers.includes(user) ? (
-                      <Check className="ml-auto flex h-5 w-5 text-primary" />
+                      <CheckIcon className="text-primary ml-auto flex size-4" />
                     ) : null}
                   </CommandItem>
                 ))}
@@ -223,24 +232,22 @@ export function CardsChat() {
             {selectedUsers.length > 0 ? (
               <div className="flex -space-x-2 overflow-hidden">
                 {selectedUsers.map((user) => (
-                  <Avatar
-                    key={user.email}
-                    className="inline-block border-2 border-background"
-                  >
+                  <Avatar key={user.email} className="inline-block border">
                     <AvatarImage src={user.avatar} />
                     <AvatarFallback>{user.name[0]}</AvatarFallback>
                   </Avatar>
                 ))}
               </div>
             ) : (
-              <p className="text-sm text-muted-foreground">
+              <p className="text-muted-foreground text-sm">
                 Select users to add to this thread.
               </p>
             )}
             <Button
               disabled={selectedUsers.length < 2}
+              size="sm"
               onClick={() => {
-                setOpen(false);
+                setOpen(false)
               }}
             >
               Continue
@@ -249,5 +256,5 @@ export function CardsChat() {
         </DialogContent>
       </Dialog>
     </>
-  );
+  )
 }

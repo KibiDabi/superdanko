@@ -60,7 +60,7 @@ const data = [
 const chartConfig = {
   goal: {
     label: "Goal",
-    color: "hsl(var(--primary))",
+    color: "var(--primary)",
   },
 } satisfies ChartConfig;
 
@@ -72,26 +72,26 @@ export function CardsActivityGoal() {
   }
 
   return (
-    <Card>
-      <CardHeader className="pb-4">
+    <Card className="h-full gap-5">
+      <CardHeader className="pb-4 p-6 space-y-2">
         <CardTitle>Daily Peanut Butter Intake</CardTitle>
         <CardDescription>Set your daily peanut butter consumption goal.</CardDescription>
       </CardHeader>
-      <CardContent className="pb-2">
-        <div className="flex items-center justify-center space-x-2">
+      <CardContent className="pb-2 p-6 pt-0">
+        <div className="flex items-center justify-center gap-4">
           <Button
             variant="outline"
             size="icon"
-            className="h-8 w-8 shrink-0 rounded-full"
+            className="size-7 shrink-0 rounded-full"
             onClick={() => onClick(-10)}
             disabled={goal <= 200}
           >
             <Minus />
             <span className="sr-only">Decrease</span>
           </Button>
-          <div className="flex-1 text-center">
-            <div className="text-5xl font-bold tracking-tighter">{goal}</div>
-            <div className="text-[0.70rem] uppercase text-muted-foreground">
+          <div className="flex-1 text-center space-y-1">
+            <div className="text-5xl font-bold tracking-tighter tabular-nums">{goal}</div>
+            <div className="text-xs uppercase text-muted-foreground ">
               Calories/day
             </div>
           </div>
@@ -117,7 +117,7 @@ export function CardsActivityGoal() {
           </ChartContainer>
         </div>
       </CardContent>
-      <CardFooter>
+      <CardFooter className="p-6 pt-0">
         <Button className="w-full">Set Goal</Button>
       </CardFooter>
     </Card>

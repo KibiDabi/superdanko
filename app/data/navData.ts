@@ -20,9 +20,9 @@ export async function getNavigationRoutes(): Promise<NavigationItem> {
           items: [],
         },
         {
-          title: "Custom Bundles",
-          href: "/bundles",
-          description: "Build your own hero pack",
+          title: "Testimonials",
+          href: "/testimonials",
+          description: "Real stories from our super satisfied customers",
           items: [],
         },
         {

@@ -29,8 +29,9 @@ export default function Page() {
             </h1>
           </div>
         </div>
-        <div className="container px-4 py-6">
+        <div className=" px-4 py-6">
           <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-5">
+
             {/* Peanut Card*/}
             <div className="lg:col-span-2 space-y-4">
               <div className="grid gap-4 sm:grid-cols-2">
@@ -60,7 +61,7 @@ export default function Page() {
                 </Card>
 
                 <Card className="w-full">
-                  <CardHeader className="pb-4">
+                  <CardHeader className="pb-4 px-6 pt-6">
                     <div className="flex justify-center mb-8">
                       <HeartIcon className="h-12 w-12 text-red-500" />
                     </div>
@@ -78,7 +79,7 @@ export default function Page() {
                       </CardDescription>
                     </div>
                   </CardHeader>
-                  <CardFooter>
+                  <CardFooter className="px-6 pb-6">
                     <Button variant="outline" className="w-full">
                       Learn More
                     </Button>
