@@ -63,6 +63,7 @@ export type VariantTableType = {
   product_id: string;
   size: string;
   price: number;
+  shopify_variant_id?: string;
 };
 
 export type SectionTextProps = {
@@ -85,6 +86,7 @@ export type CartItemSchema = {
   variant_id: string;
   variant_size: string;
   quantity: number;
+  shopify_variant_id?: string | null;
 };
 
 export type SubcategoryWithProducts = {

@@ -3,10 +3,6 @@ import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import ProductCarousel from "./_components/product-carousel";
 import { Separator } from "@/components/ui/separator";
-import { formatPrice } from "@/lib/utils";
-import VariantSelector from "./_components/product-variant-selector";
-import VariantSelectorWrapper from "./_components/product-variant-selector-wrapper";
-import AddToCartForm from "./_components/add-to-cart-form";
 import {
   Accordion,
   AccordionContent,
@@ -19,9 +15,10 @@ import { MainFooter } from "@/app/components/MainFooter";
 export async function generateMetadata({
   params,
 }: {
-  params: { productId: string };
+  params: Promise<{ productId: string }>;
 }): Promise<Metadata> {
-  const productId = decodeURIComponent(params.productId);
+  const { productId: rawProductId } = await params;
+  const productId = decodeURIComponent(rawProductId);
   const product = await fetchProductById(productId);
 
   if (!product) {
@@ -37,16 +34,39 @@ export async function generateMetadata({
 export default async function ProductPage({
   params,
 }: {
-  params: { productId: string };
+  params: Promise<{ productId: string }>;
 }) {
-  const productId = decodeURIComponent(params.productId);
+  const { productId: rawProductId } = await params;
+  const productId = decodeURIComponent(rawProductId);
   const product = await fetchProductById(productId);
-
-  console.log("Product fetched:", product);
 
   if (!product) {
     return notFound();
   }
+
+  const sizeOrder: Record<string, number> = {
+    small: 0,
+    s: 0,
+    medium: 1,
+    m: 1,
+    large: 2,
+    l: 2,
+  };
+
+  const sortedVariants = [...product.variants].sort((a, b) => {
+    const aOrder = sizeOrder[a.size.toLowerCase()] ?? Number.POSITIVE_INFINITY;
+    const bOrder = sizeOrder[b.size.toLowerCase()] ?? Number.POSITIVE_INFINITY;
+
+    if (aOrder !== bOrder) {
+      return aOrder - bOrder;
+    }
+
+    if (a.price !== b.price) {
+      return a.price - b.price;
+    }
+
+    return a.size.localeCompare(b.size);
+  });
 
   return (
     <div className="flex flex-col min-h-screen w-full">
@@ -79,7 +99,7 @@ export default async function ProductPage({
           <div className="space-y-2">
             <h2 className="line-clamp-1 text-2xl font-bold">{product.name}</h2>
           </div>
-          <ProductDetailsWrapper productId={productId} variants={product.variants} />
+          <ProductDetailsWrapper productId={productId} variants={sortedVariants} />
           <Separator className="mt-5" />
           <Accordion
             type="single"

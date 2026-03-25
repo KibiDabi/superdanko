@@ -5,7 +5,7 @@ export async function getNavigationRoutes(): Promise<NavigationItem> {
   const navLinks = await getNavLinks();
 
   return {
-    name: "Super Danko",
+    name: "SuperDanko",
     description: "An online web shop for peanut butters",
     url: "https://superdanko.com",
     ogImage: "https://superdanko.com",
@@ -16,7 +16,7 @@ export async function getNavigationRoutes(): Promise<NavigationItem> {
         {
           title: "All",
           href: "/products",
-          description: "Your ultimate source of superpowered nutrition",
+          description: "Your ultimate source of super powered nutrition",
           items: [],
         },
         {
@@ -52,16 +52,8 @@ export async function getNavigationRoutes(): Promise<NavigationItem> {
           href: "/about",
         },
         {
-          title: "Contact",
-          href: "/contact",
-        },
-        {
           title: "Blog",
           href: "/blog",
-        },
-        {
-          title: "FAQs",
-          href: "/faq",
         },
       ],
     },
@@ -90,37 +82,12 @@ export async function getNavigationRoutes(): Promise<NavigationItem> {
       title: "Discover",
       items: [
         {
-          title: "Peanut Butter Farm",
-          href: "/peanutfarm",
-        },
-        {
           title: "Recipes",
           href: "/recipes",
         },
         {
-          title: "Where to buy",
-          href: "/stores",
-        },
-        {
-          title: "Feedback",
-          href: "/feedback",
-        },
-      ],
-    },
-    {
-      title: "Who are we",
-      items: [
-        {
-          title: "Our story",
-          href: "/ourstory",
-        },
-        {
-          title: "Super Foods",
-          href: "superfoods",
-        },
-        {
-          title: "Snacking",
-          href: "snacks",
+          title: "Ingredients",
+          href: "/ingredients",
         },
       ],
     },

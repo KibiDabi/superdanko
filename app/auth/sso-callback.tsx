@@ -10,13 +10,11 @@ interface SSOCallbackProps {
 
 
 export default function SSOCallback({searchParams}: SSOCallbackProps) {
-  const { handleRedirectCallback, signOut, session } = useClerk();
+  const { handleRedirectCallback, signOut } = useClerk();
 
   useEffect(() => {
 
     async function handleCallback() {
-        console.log("Session before callback:", session);
-
       try {
         await handleRedirectCallback(searchParams);
 
@@ -26,11 +24,10 @@ export default function SSOCallback({searchParams}: SSOCallbackProps) {
         await signOut();
         window.location.href = "/auth/signin";
       }
-      console.log("Session after callback:", session);
     }
 
     handleCallback();
-  }, [handleRedirectCallback, signOut, session, searchParams]);
+  }, [handleRedirectCallback, signOut, searchParams]);
 
   return (
     <div className="flex items-center justify-center min-h-screen">

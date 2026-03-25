@@ -79,7 +79,7 @@ export function SignInForm() {
         err.errors.forEach((error) => toast.error(error.longMessage));
       } else {
         toast.error("An unexpected error occured. Please try again.");
-        console.log(err);
+        console.error(err);
       }
     } finally {
       setLoading(false);

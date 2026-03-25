@@ -1,15 +1,10 @@
 
 import React from "react";
-import {
-  fetchProducts,
-  getSubsWithProductsGroupedByCategory,
-} from "@/lib/actions";
+import { getSubsWithProductsGroupedByCategory } from "@/lib/actions";
 import ProductCard from "./ProductCard";
 
 export default async function ProductList() {
   const groupedByCat = await getSubsWithProductsGroupedByCategory();
-
-  console.log("Products all?:", groupedByCat);
 
   return (
     <>

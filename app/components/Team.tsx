@@ -2,6 +2,7 @@
 
 import { Card, CardContent } from "@/components/ui/card"; // Assuming you're using Shadcn UI components
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 interface TeamMember {
   id: string;
@@ -104,10 +105,12 @@ export default function Team({
             transition={{ delay: index * 0.1, duration: 0.5 }}
           >
             <Card className="overflow-hidden shadow-lg hover:shadow-xl transition-shadow group relative">
-              <img
+              <Image
                 src={person.avatar}
                 alt={person.name}
                 className="w-full h-64 object-cover"
+                width={600}
+                height={400}
               />
               <CardContent className="p-6 text-center">
                 <p className="text-xl font-semibold">{person.name}</p>

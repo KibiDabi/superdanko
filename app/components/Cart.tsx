@@ -1,6 +1,6 @@
 "use client";
 
-import { Button, buttonVariants } from "@/components/ui/button";
+import { Button } from "@/components/ui/button";
 import {
   Sheet,
   SheetContent,
@@ -12,21 +12,31 @@ import {
 } from "@/components/ui/sheet";
 import { Icons } from "./Icons";
 import { Separator } from "@/components/ui/separator";
-import Link from "next/link";
 import { formatPrice } from "@/lib/utils";
-import { getCart } from "@/lib/cart/cart";
 import { Badge } from "@/components/ui/badge";
 import { useCartStore } from "@/store/cartStore";
-import { useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import CartItems from "./CartItems";
+import { toast } from "sonner";
 
 export default function Cart() {
-  const { cartItems, fetchCart } = useCartStore();
+  const { cartItems, fetchCart, createCheckoutFromCart, error, clearError } = useCartStore();
+  const [isCheckingOut, setIsCheckingOut] = useState(false);
 
   // Fetch cart data when the component mounts
   useEffect(() => {
     fetchCart();
   }, [fetchCart]);
+
+  // Toast when store error is set (e.g. add/remove/update from elsewhere)
+  const prevErrorRef = useRef<string | null>(null);
+  useEffect(() => {
+    if (error && error !== prevErrorRef.current) {
+      toast.error(error);
+      prevErrorRef.current = error;
+    }
+    if (!error) prevErrorRef.current = null;
+  }, [error]);
 
   const itemCount = cartItems.reduce(
     (accumulator, item) => accumulator + Number(item.quantity),
@@ -34,9 +44,31 @@ export default function Cart() {
   );
 
   const cartTotal = cartItems.reduce(
-    (accumulator, item) => accumulator + item.quantity * Number(item.product_price),
+    (accumulator, item) =>
+      accumulator + Number(item.quantity) * Number(item.variant_price),
     0
   );
+
+  const handleCheckout = async () => {
+    if (cartItems.length === 0) return;
+    setIsCheckingOut(true);
+    try {
+      const result = await createCheckoutFromCart();
+
+      if (result.success && result.checkoutUrl) {
+        sessionStorage.setItem("sd_checkout_started", "1"); // We save this Flag to indicate checkout started, used for post-checkout cart clearing
+        // Redirect to Shopify checkout
+        window.location.href = result.checkoutUrl;
+      } else {
+        toast.error(!result.success && result.error ? result.error : "Failed to create checkout");
+        setIsCheckingOut(false);
+      }
+    } catch (error) {
+      console.error("Checkout error:", error);
+      toast.error("An error occurred during checkout");
+      setIsCheckingOut(false);
+    }
+  };
 
   return (
     <Sheet>
@@ -59,6 +91,27 @@ export default function Cart() {
           <SheetDescription className="sr-only" />
           <Separator className="my-2 bg-gray-300 dark:bg-gray-800" />
         </SheetHeader>
+        {error && (
+          <div
+            role="alert"
+            className="mx-2 sm:mx-4 flex items-start gap-2 rounded-md border border-destructive/50 bg-destructive/10 px-3 py-2 text-sm text-destructive"
+          >
+            <span className="flex-1">{error}</span>
+            <Button
+              type="button"
+              variant="ghost"
+              size="icon"
+              className="size-7 shrink-0 text-destructive hover:bg-destructive/20 hover:text-destructive"
+              aria-label="Dismiss error"
+              onClick={() => {
+                clearError();
+                prevErrorRef.current = null;
+              }}
+            >
+              <Icons.close className="size-4" />
+            </Button>
+          </div>
+        )}
         {itemCount > 0 ? (
           <>
             <CartItems items={cartItems} className="flex-1 px-2 sm:px-4" />
@@ -67,29 +120,33 @@ export default function Cart() {
               <div className="space-y-2 text-sm">
                 <div className="flex justify-between px-1">
                   <span className="font-semibold">Shipping</span>
-                  <span className="font-medium text-muted-foreground">Free</span>
+                  <span className="font-medium text-muted-foreground">Calculated at checkout</span>
                 </div>
                 <div className="flex justify-between px-1">
                   <span className="font-semibold">Taxes</span>
                   <span className="font-medium text-muted-foreground">Calculated at checkout</span>
                 </div>
                 <div className="flex justify-between px-1">
-                  <span className="font-semibold">Total</span>
+                  <span className="font-semibold">Subtotal</span>
                   <span className="font-bold text-muted-foreground">{formatPrice(cartTotal.toFixed(2))}</span>
                 </div>
               </div>
               <SheetFooter className="pt-2">
-                <SheetTrigger asChild>
-                  <Link
-                    href="/cart"
-                    className={buttonVariants({
-                      className: "w-full font-semibold",
-                      size: "sm",
-                    })}
-                  >
-                    Continue to Checkout
-                  </Link>
-                </SheetTrigger>
+                <Button
+                  onClick={handleCheckout}
+                  disabled={isCheckingOut}
+                  className="w-full font-semibold"
+                  size="sm"
+                >
+                  {isCheckingOut ? (
+                    <>
+                      <Icons.spinner className="mr-2 size-4 animate-spin" />
+                      Processing...
+                    </>
+                  ) : (
+                    "Continue to Checkout"
+                  )}
+                </Button>
               </SheetFooter>
             </div>
           </>

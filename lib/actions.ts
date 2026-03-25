@@ -46,11 +46,16 @@ export async function fetchProductById(id: string) {
       p.name, 
       p.description, 
       p.image_url,
-      json_agg(json_build_object(
-        'id', v.id,
-        'size', v.size,
-        'price', v.price
-      )) AS variants
+      COALESCE(
+        json_agg(
+          json_build_object(
+            'id', v.id,
+            'size', v.size,
+            'price', v.price
+          )
+        ) FILTER (WHERE v.id IS NOT NULL),
+        '[]'::json
+      ) AS variants
     FROM products p
     LEFT JOIN variants v ON v.product_id = p.id
     WHERE p.id = ${id}
@@ -59,12 +64,16 @@ export async function fetchProductById(id: string) {
 
   const row = result.rows[0];
 
+  if (!row) {
+    return null;
+  }
+
   const product = {
     id: row.product_id,
     name: row.name,
     description: row.description,
     image_url: row.image_url,
-    variants: row.variants, // this is already a parsed JS array
+    variants: Array.isArray(row.variants) ? row.variants : [],
   };
 
   return product;
@@ -86,19 +95,39 @@ export async function getCategories(): Promise<CategoryTableType[]> {
   }
 }
 
-export async function getProductsByCategorySlug(categorySlug: string) {
+export async function getProductsByCategorySlug(
+  categorySlug: string
+): Promise<ProductsTableType[]> {
   try {
-    const data = await sql`
-    SELECT p.* 
+    const data = await sql<ProductsTableType>`
+    SELECT 
+      p.id,
+      p.name,
+      p.description,
+      p.image_url,
+      COALESCE(
+        json_agg(
+          json_build_object(
+            'id', v.id,
+            'size', v.size,
+            'price', v.price
+          )
+        ) FILTER (WHERE v.id IS NOT NULL),
+        '[]'::json
+      ) AS variants
     FROM products p 
+    LEFT JOIN variants v ON v.product_id = p.id
     JOIN subcategories sc ON p.subcategory_id = sc.id 
     JOIN categories c ON sc.category_id = c.id 
-    WHERE c.slug = ${categorySlug}`;
+    WHERE c.slug = ${categorySlug}
+    GROUP BY p.id, p.name, p.description, p.image_url
+    ORDER BY p.name ASC`;
 
     const productsByCatSlug = data.rows;
     return productsByCatSlug;
   } catch (err) {
     console.error("Failed to get products by category_slug", err);
+    throw new Error("Unable to load products by category slug.");
   }
 }
 

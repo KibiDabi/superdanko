@@ -19,7 +19,31 @@ export default function ProductCard({
 }: {
   product: ProductsTableType;
 }) {
-  const firstVariant = product.variants[0];
+  const sizeOrder: Record<string, number> = {
+    small: 0,
+    s: 0,
+    medium: 1,
+    m: 1,
+    large: 2,
+    l: 2,
+  };
+
+  const sortedVariants = [...product.variants].sort((a, b) => {
+    const aOrder = sizeOrder[a.size.toLowerCase()] ?? Number.POSITIVE_INFINITY;
+    const bOrder = sizeOrder[b.size.toLowerCase()] ?? Number.POSITIVE_INFINITY;
+
+    if (aOrder !== bOrder) {
+      return aOrder - bOrder;
+    }
+
+    if (a.price !== b.price) {
+      return a.price - b.price;
+    }
+
+    return a.size.localeCompare(b.size);
+  });
+
+  const firstVariant = sortedVariants[0];
 
   const { addItemToCart } = useCartStore();
 
@@ -47,7 +71,7 @@ export default function ProductCard({
           <AddToCartSheet
             productName={product.name}
             productId={product.id}
-            variants={product.variants}
+            variants={sortedVariants}
           />
           {/* <Button
             aria-label="Add to cart"

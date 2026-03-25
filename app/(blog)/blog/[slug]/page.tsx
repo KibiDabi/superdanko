@@ -111,7 +111,7 @@ export default async function BlogPostPage({
 
         {/* Hero Image */}
         {imageUrl && (
-          <div className="relative w-full aspect-[16/9] rounded-xl overflow-hidden mb-12">
+          <div className="relative w-full aspect-video rounded-xl overflow-hidden mb-12">
             <Image
               src={imageUrl}
               alt={post.title}
@@ -152,7 +152,7 @@ export default async function BlogPostPage({
                       className="group flex flex-col gap-2 hover:opacity-90 transition"
                     >
                       {img && (
-                        <div className="relative w-full aspect-[16/10] rounded-md overflow-hidden">
+                        <div className="relative w-full aspect-16/10 rounded-md overflow-hidden">
                           <Image
                             src={img}
                             alt={item.title}

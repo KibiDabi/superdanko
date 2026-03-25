@@ -16,7 +16,7 @@ export default function ProductsLayout({
       <div className="flex flex-col min-h-screen w-full">
         {/* Row: sidebar + page content */}
         <div className="flex flex-1 w-full">
-          <AppSidebar className="flex-shrink-0 h-full z-40" />
+          <AppSidebar className="shrink-0 h-full z-40" />
           <SidebarInset className="flex-1 overflow-auto">
             {children}
           </SidebarInset>

@@ -15,17 +15,12 @@ export default function UpdateCartItem({ cartItem }: UpdateCartItemProps) {
   const { removeItemFromCart, updateItemFromCart } = useCartStore();
 
   const handleQuantityChange = async (newQuantity: number) => {
-    console.log("🛠️ New Quantity:", newQuantity);
-
     try {
       if (newQuantity <= 0) {
-        console.log("🗑️ Removing item...");
-        await removeItemFromCart(cartItem.product_id);
+        await removeItemFromCart(cartItem.cart_item_id);
         toast.warning(`${cartItem.product_name} has been removed from your cart.`);
-        
       } else {
-        console.log("🔄 Updating item...");
-        await updateItemFromCart(cartItem.product_id, newQuantity);
+        await updateItemFromCart(cartItem.cart_item_id, newQuantity);
         toast.success(`${cartItem.product_name} has been updated in your cart.`);
       }
     } catch (err) {
@@ -40,7 +35,7 @@ export default function UpdateCartItem({ cartItem }: UpdateCartItemProps) {
           variant="outline"
           size="icon"
           className="size-6 sm:size-8 rounded-r-none"
-          onClick={() => handleQuantityChange(cartItem.quantity - 1)}
+          onClick={() => handleQuantityChange(Number(cartItem.quantity) - 1)}
         >
           <MinusIcon className="size-3" aria-hidden="true" />
         </Button>
@@ -48,14 +43,14 @@ export default function UpdateCartItem({ cartItem }: UpdateCartItemProps) {
           type="number"
           min="0"
           className="h-6 sm:h-8 w-14 rounded-none border-x-0 text-center px-0"
-          value={cartItem.quantity}
-          onChange={(e) => handleQuantityChange(Number(e.target.value))}
+          value={Number(cartItem.quantity)}
+          onChange={(e) => handleQuantityChange(Number(e.target.value) || 0)}
         />
         <Button
           variant="outline"
           size="icon"
           className="size-6 sm:size-8 rounded-l-none rounded-r-none"
-          onClick={() => handleQuantityChange(cartItem.quantity + 1)}
+          onClick={() => handleQuantityChange(Number(cartItem.quantity) + 1)}
         >
           <PlusIcon className="size-3" aria-hidden="true" />
         </Button>
