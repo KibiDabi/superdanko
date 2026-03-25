@@ -35,7 +35,9 @@ export default function CartItems({ items, className }: CartItemProps) {
                 {item.product_name}
               </span>
               <span className="text-xs text-muted-foreground line-clamp-1 block">
-                {formatPrice((item.variant_price * item.quantity).toFixed(2))}
+                {formatPrice(
+                  (Number(item.variant_price) * Number(item.quantity)).toFixed(2)
+                )}
               </span>
               <Badge className="font-extralight px-2 py-0.5 text-[10px] sm:text-xs sm:px-2.5 text-muted-foreground gap-1" variant="outline">
                 {item.variant_size}

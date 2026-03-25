@@ -14,7 +14,6 @@ import { updateCartItemSchema } from "@/lib/validations/cart";
 import { useCartStore } from "@/store/cartStore";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader2Icon, MinusIcon, PlusIcon } from "lucide-react";
-import { useRouter } from "next/navigation";
 import { useId, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
@@ -28,15 +27,14 @@ interface AddToCartProps {
 
 export default function AddToCartForm({
   variantId,
-  showBuyNow,
+  showBuyNow: _showBuyNow,
   onSuccess,
 }: AddToCartProps) {
   const { addItemToCart } = useCartStore();
 
   const rootId = useId();
-  const router = useRouter();
 
-  const [isAddingToCart, setIsAdddingToCart] = useState(false);
+  const [isAddingToCart, setIsAddingToCart] = useState(false);
   const [isBuying, setIsBuying] = useState(false);
 
   const form = useForm<z.infer<typeof updateCartItemSchema>>({
@@ -48,14 +46,14 @@ export default function AddToCartForm({
 
   async function onSubmit(value: z.infer<typeof updateCartItemSchema>) {
     try {
-      setIsAdddingToCart(true);
+      setIsAddingToCart(true);
       await addItemToCart(variantId, value.quantity);
-      toast.success("Form added to cart!");
+      toast.success("Item added to cart!");
       onSuccess?.();
     } catch (error) {
       toast.error("Form failed to add to cart.");
     } finally {
-      setIsAdddingToCart(false);
+      setIsAddingToCart(false);
     }
   }
 
@@ -127,7 +125,7 @@ export default function AddToCartForm({
                   aria-label="Add to cart"
                   type="submit"
                   size="sm"
-                  className="h-8 whitespace-nowrap w-[128px]"
+                  className="h-8 whitespace-nowrap w-32"
                   variant="default"
                   disabled={isAddingToCart}
                 >

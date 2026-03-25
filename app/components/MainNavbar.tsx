@@ -26,7 +26,6 @@ interface NavbarProps {
 }
 
 export default function MainNavbar({ items, siteMeta, className }: NavbarProps) {
-  console.log(items.map((item) => item.items.map((item) => item.description)));
   return (
     <div className={cn("hidden gap-6 lg:flex", className)}>
       <Link href="/" className="hidden items-center space-x-2 lg:flex">

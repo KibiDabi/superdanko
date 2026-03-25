@@ -28,8 +28,23 @@ async function seedProducts(client) {
       );
     `;
 
+    // ✅ Added this block to add shopify_variant_id column if it doesn't exist
+    await client.sql`
+      DO $$ BEGIN
+        IF NOT EXISTS (
+          SELECT 1
+          FROM information_schema.columns
+          WHERE table_name = 'variants'
+            AND column_name = 'shopify_variant_id'
+        ) THEN
+          ALTER TABLE variants
+          ADD COLUMN shopify_variant_id TEXT;
+        END IF;
+      END $$;
+    `;
+
     // Truncate variants table (safe way to remove all old variants)
-    await client.sql`TRUNCATE TABLE variants RESTART IDENTITY CASCADE;`;
+    // await client.sql`TRUNCATE TABLE variants RESTART IDENTITY CASCADE;`;
 
     // // Drop the "products" table if it exists
     // await client.sql`DROP TABLE IF EXISTS variants`;
@@ -58,6 +73,7 @@ async function seedProducts(client) {
     // Insert data into the "products" table
     const insertedProducts = [];
 
+    
     for (const product of images) {
       // Get the subcategory_id using subcategory_slug
       const subcategoryResult = await client.sql`
@@ -111,5 +127,5 @@ async function main() {
 }
 
 main().catch((err) => {
-  console.error("An error occured while attempting to seed the database!", err);
+  console.error("An error occurred while attempting to seed the database!", err);
 });

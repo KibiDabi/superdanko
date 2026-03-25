@@ -1,7 +1,6 @@
 "use client";
 
 import { AspectRatio } from "@/components/ui/aspect-ratio";
-import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -11,12 +10,8 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { formatPrice } from "@/lib/utils";
-import { useCartStore } from "@/store/cartStore";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
-import { toast } from "sonner";
-import { Icons } from "../Icons";
 import AddToCartSheet from "../AddToCartSheet";
 
 type Variant = {
@@ -36,11 +31,31 @@ interface ProductCardProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 export default function ProductPage({ product }: ProductCardProps) {
-  const firstVariant = product.variants[0];
+  const sizeOrder: Record<string, number> = {
+    small: 0,
+    s: 0,
+    medium: 1,
+    m: 1,
+    large: 2,
+    l: 2,
+  };
 
-  const { addItemToCart } = useCartStore();
+  const sortedVariants = [...product.variants].sort((a, b) => {
+    const aOrder = sizeOrder[a.size.toLowerCase()] ?? Number.POSITIVE_INFINITY;
+    const bOrder = sizeOrder[b.size.toLowerCase()] ?? Number.POSITIVE_INFINITY;
 
-  const [isLoading, setIsLoading] = useState(false);
+    if (aOrder !== bOrder) {
+      return aOrder - bOrder;
+    }
+
+    if (a.price !== b.price) {
+      return a.price - b.price;
+    }
+
+    return a.size.localeCompare(b.size);
+  });
+
+  const firstVariant = sortedVariants[0];
 
   return (
     <Card className="rounded-lg overflow-hidden size-full">
@@ -63,7 +78,7 @@ export default function ProductPage({ product }: ProductCardProps) {
         </CardHeader>
       </Link>
 
-      <Link href={`/products/${product.id}`} tabIndex={-1}>
+      <Link href={`/product/${product.id}`} tabIndex={-1}>
         <CardContent className="space-y-1.5 p-4">
           <CardTitle className="line-clamp-1">{product.name}</CardTitle>
           <CardDescription className="line-clamp-1">
@@ -74,7 +89,7 @@ export default function ProductPage({ product }: ProductCardProps) {
 
       <CardFooter className="p-4 pt-1">
         <div className="flex w-full items-center space-x-2">
-          <AddToCartSheet productName={product.name} productId={product.id} variants={product.variants} />
+          <AddToCartSheet productName={product.name} productId={product.id} variants={sortedVariants} />
           {/* <Button
             aria-label="Add to cart"
             size="sm"

@@ -1,17 +1,6 @@
 import { getCategories, getProductsByCategorySlug } from "@/lib/actions";
 import { notFound } from "next/navigation";
-
-import Link from "next/link";
-import { type SanityDocument } from "next-sanity";
-
-import { client } from "@/sanity/client";
-
-const POSTS_QUERY = `*[
-  _type == "post"
-  && defined(slug.current)
-]|order(publishedAt desc)[0...12]{_id, title, slug, publishedAt}`;
-
-const options = { next: { revalidate: 30 } };
+import ProductCard from "@/app/components/all-products/product-card";
 
 // Return a list of `params` to populate the [category] dynamic segment
 export async function generateStaticParams() {
@@ -27,13 +16,9 @@ export async function generateStaticParams() {
 export default async function CategoryPage({
   params,
 }: {
-  params: { category: string };
+  params: Promise<{ category: string }>;
 }) {
-
-    const posts = await client.fetch<SanityDocument[]>(POSTS_QUERY, {}, options);
-
-
-  const { category } = params;
+  const { category } = await params;
 
   const products = await getProductsByCategorySlug(category);
 
@@ -42,18 +27,15 @@ export default async function CategoryPage({
   }
 
   return (
-    <main className="container mx-auto min-h-screen max-w-3xl p-8">
-      <h1 className="text-4xl font-bold mb-8">Posts</h1>
-      <ul className="flex flex-col gap-y-4">
-        {posts.map((post) => (
-          <li className="hover:underline" key={post._id}>
-            <Link href={`/${post.slug.current}`}>
-              <h2 className="text-xl font-semibold">{post.title}</h2>
-              <p>{new Date(post.publishedAt).toLocaleDateString()}</p>
-            </Link>
-          </li>
+    <main className="container mx-auto min-h-screen p-8">
+      <h1 className="mb-8 text-4xl font-bold capitalize">
+        {category.replace(/-/g, " ")} Products
+      </h1>
+      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {products.map((product) => (
+          <ProductCard key={product.id} product={product} />
         ))}
-      </ul>
+      </div>
     </main>
   );
 }

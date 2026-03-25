@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { Icons } from "./Icons";
@@ -21,9 +22,14 @@ interface MobileNavbarProps {
 }
 
 export default function MobileNavbar({ items, className }: MobileNavbarProps) {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleLinkClick = () => {
+    setIsOpen(false);
+  };
 
   return (
-    <Sheet>
+    <Sheet open={isOpen} onOpenChange={setIsOpen}>
       <SheetTrigger asChild>
         <Button
           id="mobile-navbar-button"
@@ -39,7 +45,7 @@ export default function MobileNavbar({ items, className }: MobileNavbarProps) {
         <SheetHeader>
         <div className="w-full px-7">
           <SheetTitle>
-          <Link href="/" className="items-center space-x-2 flex">
+          <Link href="/" onClick={handleLinkClick} className="items-center space-x-2 flex">
             <Image
               src="/SUPERDANKO_piksa.png"
               alt="logo"
@@ -65,6 +71,7 @@ export default function MobileNavbar({ items, className }: MobileNavbarProps) {
                         <Link
                           key={item.title}
                           href={item.href}
+                          onClick={handleLinkClick}
                           className="text-foreground/70 transition-colors hover:text-foreground"
                         >
                           {item.title}

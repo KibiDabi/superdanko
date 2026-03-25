@@ -7,9 +7,9 @@ const images = [
       "https://res.cloudinary.com/dqtzlwr74/image/upload/v1751631683/superdanko/large/superdanko_red_cce62i.jpg",
     subcategory_slug: "classic-peanut",
     variants: [
-      { size: "small", price: 9.99 },
-      { size: "medium", price: 14.99 },
-      { size: "large", price: 20.99 },
+      { size: "small", price: 9.99, shopify_variant_id: "gid://shopify/ProductVariant/47549744578819" },
+      { size: "medium", price: 14.99, shopify_variant_id: "gid://shopify/ProductVariant/47549744611587" },
+      { size: "large", price: 20.99, shopify_variant_id: "gid://shopify/ProductVariant/47549744644355" },
     ],
   },
   {
@@ -20,9 +20,9 @@ const images = [
       "https://res.cloudinary.com/dqtzlwr74/image/upload/v1751624189/superdanko/large/superdanko_yellow_amigpb.jpg",
     subcategory_slug: "classic-crunchy-peanut",
     variants: [
-      { size: "small", price: 9.99 },
-      { size: "medium", price: 14.99 },
-      { size: "large", price: 20.99 },
+      { size: "small", price: 9.99, shopify_variant_id: "gid://shopify/ProductVariant/47761822613763" },
+      { size: "medium", price: 14.99, shopify_variant_id: "gid://shopify/ProductVariant/47761822646531" },
+      { size: "large", price: 20.99, shopify_variant_id: "gid://shopify/ProductVariant/47761822679299" },
     ],
   },
   {
@@ -33,9 +33,9 @@ const images = [
       "https://res.cloudinary.com/dqtzlwr74/image/upload/v1751624188/superdanko/large/superdanko_green_azjcu8.jpg",
     subcategory_slug: "vegan-peanut",
     variants: [
-      { size: "small", price: 9.99 },
-      { size: "medium", price: 14.99 },
-      { size: "large", price: 20.99 },
+      { size: "small", price: 9.99, shopify_variant_id: "gid://shopify/ProductVariant/47761851089155" },
+      { size: "medium", price: 14.99, shopify_variant_id: "gid://shopify/ProductVariant/47761851121923" },
+      { size: "large", price: 20.99, shopify_variant_id: "gid://shopify/ProductVariant/47761851154691" },
     ],
   },
   {
@@ -46,9 +46,9 @@ const images = [
       "https://res.cloudinary.com/dqtzlwr74/image/upload/v1751624188/superdanko/large/superdanko_blue_d9j1z8.jpg",
     subcategory_slug: "vegan-crunchy-peanut",
     variants: [
-      { size: "small", price: 9.99 },
-      { size: "medium", price: 14.99 },
-      { size: "large", price: 20.99 },
+      { size: "small", price: 9.99, shopify_variant_id: "gid://shopify/ProductVariant/47761855971587" },
+      { size: "medium", price: 14.99, shopify_variant_id: "gid://shopify/ProductVariant/47761856004355" },
+      { size: "large", price: 20.99, shopify_variant_id: "gid://shopify/ProductVariant/47761856037123" },
     ],
   },
   {
@@ -59,9 +59,9 @@ const images = [
       "https://res.cloudinary.com/dqtzlwr74/image/upload/v1751624188/superdanko/large/superdanko_orange_upmova.jpg",
     subcategory_slug: "classic-hazelnut",
     variants: [
-      { size: "small", price: 9.99 },
-      { size: "medium", price: 14.99 },
-      { size: "large", price: 20.99 },
+      { size: "small", price: 9.99, shopify_variant_id: "gid://shopify/ProductVariant/47761856168195" },
+      { size: "medium", price: 14.99, shopify_variant_id: "gid://shopify/ProductVariant/47761856200963" },
+      { size: "large", price: 20.99, shopify_variant_id: "gid://shopify/ProductVariant/47761856233731" },
     ],
   },
   {
@@ -72,9 +72,9 @@ const images = [
       "https://res.cloudinary.com/dqtzlwr74/image/upload/v1751624188/superdanko/large/superdanko_purple_aqfxgr.jpg",
     subcategory_slug: "vegan-hazelnut",
     variants: [
-      { size: "small", price: 9.99 },
-      { size: "medium", price: 14.99 },
-      { size: "large", price: 20.99 },
+      { size: "small", price: 9.99, shopify_variant_id: "gid://shopify/ProductVariant/47761856495875" },
+      { size: "medium", price: 14.99, shopify_variant_id: "gid://shopify/ProductVariant/47761856528643" },
+      { size: "large", price: 20.99, shopify_variant_id: "gid://shopify/ProductVariant/47761856561411" },
     ],
   },
 ];

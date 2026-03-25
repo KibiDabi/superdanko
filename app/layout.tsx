@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import { Suspense } from "react";
 import {
   Inter as FontSans,
   JetBrains_Mono as FontMono,
@@ -12,6 +13,7 @@ import { ClerkProvider } from "@clerk/nextjs";
 import { Toaster } from "sonner";
 import Header from "./components/Header";
 import { SpeedInsights } from '@vercel/speed-insights/next';
+import { CheckoutReturnSync } from "./components/CheckoutReturnSync";
 
 const fontSans = FontSans({ 
   subsets: ["latin"], 
@@ -82,6 +84,9 @@ export default function RootLayout({
             enableSystem={false}
             storageKey=""
           >
+            <Suspense fallback={null}>
+              <CheckoutReturnSync />
+            </Suspense>
             <div className="flex flex-col ">
               <Header />
               <div className="flex flex-1 overflow-hidden relative">{children}</div>

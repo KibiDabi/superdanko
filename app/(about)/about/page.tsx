@@ -69,7 +69,7 @@ export default function AboutUs() {
               {index > 0 && (
                 <Separator
                   orientation="vertical"
-                  className="mx-6 hidden h-auto w-[2px] bg-linear-to-b from-muted via-transparent to-muted md:block"
+                  className="mx-6 hidden h-auto w-0.5 bg-linear-to-b from-muted via-transparent to-muted md:block"
                 />
               )}
               <div

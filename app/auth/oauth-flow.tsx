@@ -21,13 +21,11 @@ export default function OAuthSignIn() {
 
     try {
       setLoadingState(strategy);
-      console.log("Starting OAuth with:", strategy);
       await signIn.authenticateWithRedirect({
         strategy,
         redirectUrl: "/auth/sso-callback",
         redirectUrlComplete: "/",
       });
-      console.log("Redirect initiated successfully");
     } catch (err: any) {
       setLoadingState(null);
       console.error("OAuth sign in failed:", err);
