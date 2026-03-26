@@ -48,7 +48,7 @@ interface CartLinesAddPayload {
  */
 export async function createShopifyCheckout(
   lineItems: CartLineItem[],
-): Promise<string | null> {
+): Promise<string> {
 
   const mutation = `
     mutation cartCreate($input: CartInput!) {
@@ -120,7 +120,10 @@ export async function createShopifyCheckout(
     return checkoutUrl;
   } catch (error) {
     console.error("Error creating Shopify checkout:", { error, lineItems });
-    return null;
+    if (error instanceof Error) {
+      throw error;
+    }
+    throw new Error("Failed to create checkout with Shopify");
   }
 }
 

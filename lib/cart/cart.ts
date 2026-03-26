@@ -277,7 +277,7 @@ export async function createCheckout(): Promise<CheckoutResult> {
     if (!checkoutUrl) {
       return {
         success: false,
-        error: "Failed to create checkout. Please try again.",
+        error: "Shopify returned an empty checkout URL.",
       };
     }
 
@@ -287,6 +287,28 @@ export async function createCheckout(): Promise<CheckoutResult> {
     };
   } catch (error) {
     console.error("❌ Error creating checkout:", error);
+
+    if (error instanceof Error) {
+      if (error.message.includes("Missing env")) {
+        return {
+          success: false,
+          error: "Checkout is not configured yet. Please contact support.",
+        };
+      }
+
+      if (error.message.includes("Shopify Storefront API error")) {
+        return {
+          success: false,
+          error: "Shopify checkout is temporarily unavailable. Please try again in a moment.",
+        };
+      }
+
+      return {
+        success: false,
+        error: error.message,
+      };
+    }
+
     return {
       success: false,
       error: "An unexpected error occurred",
