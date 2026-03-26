@@ -60,7 +60,11 @@ export default function Cart() {
         // Redirect to Shopify checkout
         window.location.href = result.checkoutUrl;
       } else {
-        toast.error(!result.success && result.error ? result.error : "Failed to create checkout");
+        toast.error(
+          !result.success && result.error
+            ? result.error
+            : "Checkout could not be created. Please try again.",
+        );
         setIsCheckingOut(false);
       }
     } catch (error) {
