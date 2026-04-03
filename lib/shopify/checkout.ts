@@ -47,7 +47,7 @@ interface CartLinesAddPayload {
  * @returns Checkout URL to redirect the user to
  */
 export async function createShopifyCheckout(
-  lineItems: CartLineItem[],
+lineItems: CartLineItem[], cartId: string,
 ): Promise<string> {
 
   const mutation = `
@@ -87,6 +87,12 @@ export async function createShopifyCheckout(
         merchandiseId: item.variantId,
         quantity: item.quantity,
       })),
+      attributes: [
+        {
+          key: 'cart_id',
+          value: cartId,
+        }
+      ]
     },
   };
 

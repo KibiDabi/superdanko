@@ -239,6 +239,17 @@ export async function updateCart({
  */
 export async function createCheckout(): Promise<CheckoutResult> {
   try {
+
+    const cookieStore = await cookies();
+    const cartId = cookieStore.get('cartId')?.value;
+
+    if (!cartId) {
+      return {
+        success: false,
+        error: 'No cart found. Please add items to your cart before checking out.',
+      };
+    }
+
     const cartItems = await getCart();
 
     // Prevent empty cart checkout
@@ -272,7 +283,7 @@ export async function createCheckout(): Promise<CheckoutResult> {
     }));
 
     // Create checkout using Shopify Storefront API
-    const checkoutUrl = await createShopifyCheckout(lineItems);
+    const checkoutUrl = await createShopifyCheckout(lineItems, cartId);
 
     if (!checkoutUrl) {
       return {
