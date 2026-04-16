@@ -1,5 +1,4 @@
 import  AppSidebar  from "@/app/components/AppSidebar";
-import { MainFooter } from "@/app/components/MainFooter";
 import { ScrollRestoration } from "@/app/components/ScrollRestoration";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 
@@ -21,9 +20,6 @@ export default function ProductsLayout({
             {children}
           </SidebarInset>
         </div>
-
-        {/* Footer always at the bottom */}
-        <MainFooter />
       </div>
     </SidebarProvider>
   );

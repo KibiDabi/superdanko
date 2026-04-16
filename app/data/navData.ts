@@ -91,6 +91,23 @@ export async function getNavigationRoutes(): Promise<NavigationItem> {
         },
       ],
     },
+    {
+      title: "Legal",
+      items: [
+        {
+          title: "Privacy Policy",
+          href: "/privacy-policy",
+        },
+        {
+          title: "Terms & Conditions",
+          href: "/terms-and-conditions",
+        },
+        {
+          title: "Cookie Policy",
+          href: "/cookie-policy",
+        },
+      ],
+    },
   ],
 };
 }

@@ -2,7 +2,6 @@ import { getSubsWithProductsGroupedByCategory } from "@/lib/actions";
 import { ProductsHeader } from "./_components/ProductsHeader";
 import ProductPage from "@/app/components/all-products/product-card";
 import { Separator } from "@/components/ui/separator";
-import { MainFooter } from "@/app/components/MainFooter";
 
 export default async function Page() {
   const groupedByCat = await getSubsWithProductsGroupedByCategory();
@@ -37,9 +36,6 @@ export default async function Page() {
           })}
         </div>
       </div>
-      {/* <div className="mt-20">
-      <MainFooter />
-      </div> */}
     </>
   );
 }

@@ -10,7 +10,6 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import ProductDetailsWrapper from "./_components/product-details-wrapper";
-import { MainFooter } from "@/app/components/MainFooter";
 
 export async function generateMetadata({
   params,
@@ -123,9 +122,6 @@ export default async function ProductPage({
       
     </section>
     </main>
-    <div className="mt-20">
-        <MainFooter />
-      </div>
     </div>
   );
 }

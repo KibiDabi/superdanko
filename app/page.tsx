@@ -2,7 +2,6 @@ import * as React from "react";
 
 import Hero from "./components/Hero";
 import ProductList from "./components/ProductList";
-import { MainFooter } from "./components/MainFooter";
 import AnimatedTextSection from "./components/AnimatedTextSection";
 import { LazyWrapper } from "./components/LazyWrapper";
 
@@ -43,7 +42,6 @@ export default function Home() {
           <SuperdankoCarousel href="/products" />
         </LazyWrapper>
       </div>
-      <MainFooter />
     </div>
   );
 }

@@ -14,6 +14,7 @@ import { Toaster } from "sonner";
 import Header from "./components/Header";
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import { CheckoutReturnSync } from "./components/CheckoutReturnSync";
+import { MainFooter } from "./components/MainFooter";
 
 const fontSans = FontSans({ 
   subsets: ["latin"], 
@@ -90,6 +91,7 @@ export default function RootLayout({
             <div className="flex flex-col ">
               <Header />
               <div className="flex flex-1 overflow-hidden relative">{children}</div>
+              <MainFooter />
             </div>
           </ThemeProvider>
           <Toaster position="bottom-center" richColors theme="dark" />
